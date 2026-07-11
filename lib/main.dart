@@ -1,84 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:logic_arcade/core/theme.dart';
-import 'package:logic_arcade/screens/main_menu.dart';
-import 'package:logic_arcade/services/ads_service.dart';
-import 'package:logic_arcade/services/unlock_service.dart';
 
-import 'package:logic_arcade/games/liquid_sort/liquid_sort_game.dart';
-import 'package:logic_arcade/games/tile/tile_game.dart';
-import 'package:logic_arcade/games/tic_tac_toe/tic_tac_toe_game.dart';
-import 'package:logic_arcade/games/memory_match/memory_match_game.dart';
-import 'package:logic_arcade/games/sliding_puzzle/sliding_puzzle_game.dart';
-import 'package:logic_arcade/games/ludo/ludo_game.dart';
-import 'package:logic_arcade/games/bubble_shot/bubble_shot_game.dart';
-import 'package:logic_arcade/games/colour_calculator/colour_calculator_game.dart';
-import 'package:logic_arcade/games/block_puzzle/block_puzzle_game.dart';
-import 'package:logic_arcade/games/gully_fighting/gully_fighting_game.dart';
-import 'package:logic_arcade/games/dot_arrow_connect/dot_arrow_connect_game.dart';
-import 'package:logic_arcade/games/candy_crush/candy_crush_game.dart';
-import 'package:logic_arcade/games/angry_birds/angry_birds_game.dart';
-import 'package:logic_arcade/games/unscrew_nuts/unscrew_nuts_game.dart';
-import 'package:logic_arcade/games/snake/snake_game.dart';
-import 'package:logic_arcade/games/chess/chess_game.dart';
-import 'package:logic_arcade/games/checkers/checkers_game.dart';
-
-import 'package:logic_arcade/games/carrom/carrom_game.dart';
-import 'package:logic_arcade/games/minesweeper/minesweeper_game.dart';
-import 'package:logic_arcade/games/connect_four/connect_four_game.dart';
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Set preferred orientations
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
-  
-   // Initialize Ads
-   AdsService().initialize();
-
-   // Initialize Unlock Service
-   await UnlockService().initialize();
-
-  runApp(const LogicArcadeApp());
+void main() {
+  runApp(const MyApp());
 }
 
-class LogicArcadeApp extends StatelessWidget {
-  const LogicArcadeApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Logic Arcade',
+      title: 'logic arcade',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFF6366F1),
+        scaffoldBackgroundColor: const Color(0xFF0F172A),
+        fontFamily: 'Roboto',
+      ),
+      home: const DashboardScreen(),
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const MainMenuScreen(),
-        // We will enable these routes as we build the files
-        '/liquid_sort': (context) => const LiquidSortGame(),
-        '/tile_game': (context) => const TileGame(),
-        '/tic_tac_toe': (context) => const TicTacToeSetupScreen(),
-        '/memory_match': (context) => const MemoryMatchGame(),
-        '/sliding_puzzle': (context) => const SlidingPuzzleGame(),
-        '/ludo': (context) => const LudoSetupScreen(),
-        '/bubble_shot': (context) => const BubbleShotGame(),
-        '/colour_calculator': (context) => const ColourCalculatorGame(),
-        '/block_puzzle': (context) => const BlockPuzzleGame(),
-        '/gully_fighting': (context) => const GullyFightingGame(),
-        '/dot_arrow_connect': (context) => const DotArrowConnectGame(),
-        '/candy_crush': (context) => const CandyCrushGame(),
-        '/angry_birds': (context) => const AngryBirdsGame(),
-        '/unscrew_nuts': (context) => const UnscrewNutsGame(),
-        '/snake': (context) => const SnakeGame(),
-        '/chess': (context) => const ChessSetupScreen(),
-        '/checkers': (context) => const CheckersSetupScreen(),
-        '/minesweeper': (context) => const MinesweeperGame(),
-        '/connect_four': (context) => const ConnectFourGame(),
-        '/carrom': (context) => const CarromSetupScreen(),
-      },
+    );
+  }
+}
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Background Gradient Mesh
+          Positioned(
+            top: -100,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF6366F1).withOpacity(0.2),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -100,
+            right: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFFEC4899).withOpacity(0.2),
+              ),
+            ),
+          ),
+          
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'logic arcade',
+                      style: const TextStyle(
+                        fontSize: 42,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Next-generation enterprise software platform.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 48),
+                    Container(
+                      padding: const EdgeInsets.all(32),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: Colors.white.withOpacity(0.1)),
+                      ),
+                      child: Column(
+                        children: [
+                          const Icon(Icons.check_circle_outline, size: 64, color: Color(0xFF6366F1)),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'System Operational',
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6366F1),
+                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                            ),
+                            onPressed: () {},
+                            child: const Text('Launch Application', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
