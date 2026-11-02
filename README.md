@@ -224,3 +224,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Flutter team for the amazing framework
 - Game design inspiration from classic puzzle games
 - Material Design for UI inspiration
+
+## Built by VisionQuantech
+
+Part of the [VisionQuantech](https://visionquantech.com/) AI automation studio. See [AI voice agents](https://visionquantech.com/ai-voice-agents) and the guide to [AI phone answering for real estate agents](https://visionquantech.com/blog/ai-phone-answering-service-for-real-estate-agents).
